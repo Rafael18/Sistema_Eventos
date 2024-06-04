@@ -1,7 +1,74 @@
-<h1>Eventos do Component</h1>
+<h2>Eventos</h2>
+<hr />
 
-<div *ngFor="let evento of eventos">
-    <p><b>Tema:</b> {{ evento.tema }}</p>
-    <p><b>Local: </b> {{ evento.local }}</p>
-    <hr />
+<div class="form-inline">
+  <div class="form-group mb-2">
+    <div class="row mb-2">
+      <div class="col col-md-1">
+        <label class="mr-2">Filtro</label>
+      </div>
+      <div class="col col-md-3">
+        <input
+          type="text"
+          class="form-control mr-2"
+          placeholder="Buscar"
+          [(ngModel)]="filtrolista"
+        />
+      </div>
+    </div>
+  </div>
 </div>
+
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>
+        <button
+          type="button"
+          class="btn btn-outline-light btn-sm"
+          (click)="alterarImagem()"
+        >
+          {{ !exibirImagem ? "Exibir" : "Ocultar" }}
+        </button>
+      </th>
+      <th>#</th>
+      <th>Tema</th>
+      <th>Local</th>
+      <th>Data</th>
+      <th>Qtd Pessoas</th>
+      <th>Lote</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="eventos && eventos.length">
+    <tr *ngFor="let evento of eventosFiltrados">
+      <td>
+        <img
+          [collapse]="!exibirImagem"
+          [isAnimated]="true"
+          src="/assets/{{ evento.imagemUrl }}"
+          [style.width.px]="larguraImagem"
+          [style.margin.px]="margemImagem"
+          width="50px"
+        />
+      </td>
+      <td>{{ evento.eventoId }}</td>
+      <td>{{ evento.tema }}</td>
+      <td>{{ evento.local }}</td>
+      <td>{{ evento.dataEvento }}</td>
+      <td>{{ evento.qtdPessoas }}</td>
+      <td>{{ evento.lote }}</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm mx-2">Editar</button>
+        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!eventos.length" class="text-center">
+    <tr>
+      <td colspan="8" class="">
+        <h4>Nenhum evento encontrado</h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>
