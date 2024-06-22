@@ -1,7 +1,9 @@
 <app-titulo [titulo]="'Perfil'"></app-titulo>
 <div class="card rounded shadow-sm">
-	<form>
+	<form [formGroup]="form">
 		<div class="row p-3">
+			<p>{{ form.value | json }}</p>
+			<p>{{ form.status | json }}</p>
 			<div class="col-lg-3 pt-1">
 				<div class="card mb-2">
 					<div class="card-header"></div>
@@ -44,49 +46,95 @@
 					</div>
 					<div class="col">
 						<label>Título</label>
-						<select class="form-control">
+						<select class="form-control" 
+						formControlName="titulo"
+						[ngClass]="{ 'is-invalid': f.titulo.errors && f.titulo.touched }">
 							<option value=""></option>
 							<option value="0">Não Quero</option>
-							<option value="Senhorita">Tecnólogo(a)</option>
-							<option value="Senhorita">Bacharel</option>
-							<option value="Senhorita">Especialista</option>
-							<option value="Senhorita">Pós Graduado(a)</option>
-							<option value="Senhorita">Mestre</option>
-							<option value="Senhorita">Doutor(a)</option>
-							<option value="Senhorita">Pós Doc</option>
+							<option value="Tecnólogo">Tecnólogo(a)</option>
+							<option value="Bacharel">Bacharel</option>
+							<option value="Especialista">Especialista</option>
+							<option value="Pós Graduado(a)">Pós Graduado(a)</option>
+							<option value="Mestre">Mestre</option>
+							<option value="Doutor(a)">Doutor(a)</option>
+							<option value="Pós Doc">Pós Doc</option>
 						</select>
+						<div class="invalid-feedback">
+							Título é obrigatório
+						</div>
 					</div>
 					<div class="col-sm-5">
 						<label>Primeiro Nome</label>
-						<input type="text" class="form-control"/>
+						<input type="text" class="form-control"
+						formControlName="primeiroNome"
+						[ngClass]="{ 'is-invalid': f.primeiroNome.errors && f.primeiroNome.touched }"
+						placeholder="Insira o Primeiro nome" />
 						
+						 <div class="invalid-feedback">
+							Primeiro é obrigatório
+						</div>
 					</div>
 					<div class="col-sm-5">
 						<label>Último nome</label>
-						<input type="text" class="form-control"/>
+						<input type="text" class="form-control"
+						formControlName="ultimoNome"
+						[ngClass]="{'is-invalid': f.ultimoNome.errors && f.ultimoNome.touched}"
+						placeholder="Insira o Último nome"  />
 						
+						<div class="invalid-feedback">
+							Último nome é obrigatório
+						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-5">
 						<label>E-mail</label>
-						<input type="text" class="form-control" />
+						<input type="text" class="form-control"
+						formControlName="email"
+						[ngClass]="{'is-invalid': f.email.errors && f.email.touched }"
+						placeholder="Insira o e-mail" />
+
+						<div *ngIf="f.email.errors?.required && f.email.touched" class="invalid-feedback">
+							E-mail é obrigatório
+						</div>
+						<div *ngIf="f.email.errors?.email && f.email.touched" class="invalid-feedback">
+							Deve informar um e-mail válido
+						</div>
 					</div>
 					<div class="col-sm-4">
 						<label>Telefone</label>
-						<input type="text" class="form-control" />
+						<input type="text" class="form-control"
+						formControlName="telefone"
+						[ngClass]="{'is-invalid': f.telefone.errors && f.telefone.touched}"
+						placeholder="(00) 90000-0000" />
+
+						<div class="invalid-feedback">
+							Telefone é obrigatório
+						</div>
 					</div>
 					<div class="col-sm">
 						<label>Função</label>
-						<select class="form-control">
+						<select class="form-control" 
+						formControlName="funcao"
+						[ngClass]="{'is-invalid': f.funcao.errors && f.funcao.touched}">
 							<option value=""></option>
 							<option value="Participante">Participante</option>
 							<option value="Palestrante">Palestrante</option>
 						</select>
+						<div class="invalid-feedback">
+							Funcão é obrigatório
+						</div>
 					</div>
 					<form-group class="col-12">
 						<label>Descrição</label>
-						<input type="text" class="form-control" />
+						<input type="text" class="form-control" 
+						formControlName="descricao"
+						[ngClass]="{'is-invalid': f.descricao.errors && f.descricao.touched}"
+						placeholder="Informe a descrição" />
+						
+						<div class="invalid-feedback">
+							Descrição é obrigatório
+						</div>
 					</form-group>
 				</div>
 				<div>
@@ -96,21 +144,41 @@
 				<div class="row">
 					<div class="col-sm">
 						<label>Senha</label>
-						<input type="password" class="form-control" />
+						<input type="password" class="form-control" 
+						formControlName="senha"
+						[ngClass]="{'is-invalid': f.senha.errors && f.senha.touched}"
+						placeholder="Digite uma Senha" />
+
+						<div *ngIf="f.senha.errors?.required && f.senha.touched" class="invalid-feedback">
+							Senha é obrigatório
+						</div>
+						<div *ngIf="f.senha.errors?.minlength && f.senha.touched" class="invalid-feedback">
+							Deve conter no mínimo 6 caracteres
+						</div>
 					</div>
 					<div class="col-sm">
 						<label>Confirmar Senha</label>
-						<input type="password" class="form-control" />
+						<input type="password" class="form-control" 
+						formControlName="confirmeSenha"
+						[ngClass]="{'is-invalid': f.confirmeSenha.errors && f.confirmeSenha.touched}"
+						placeholder="Confirme a Senha" />
+
+						<div *ngIf="f.confirmeSenha.errors?.required" class="invalid-feedback">
+							Confirmar Senha é obrigatório
+						</div>
+						<div *ngIf="f.confirmeSenha.errors?.mustMatch" class="invalid-feedback">
+							Confirmar senha deve ter o mesmo valor da Senha.
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="card-footer">
 			<div class="d-flex">
-				<button class="btn btn-outline-secondary me-auto border">
+				<button class="btn btn-outline-secondary me-auto border"  (click)="resetForm()">
 					Cancelar Alteração
 				</button>
-				<button class="btn btn-success">
+				<button class="btn btn-success" [disabled]="!form.valid">
 					<!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
 					Salvar Alteração
 				</button>
