@@ -4,6 +4,7 @@ using ProEventos.Application;
 using ProEventos.Persistence.Contextos;
 using ProEventos.Persistence.Contratos;
 using ProEventos.Persistence;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services.AddControllers()
                 .AddNewtonsoftJson(
                     x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IEventoService, EventoService>();
 builder.Services.AddScoped<IGeralPersist, GeralPersist>();
