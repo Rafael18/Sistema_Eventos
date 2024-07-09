@@ -27,9 +27,9 @@ namespace ProEventos.Application.Dtos
         [Display(Name ="E-mail")]
         [EmailAddress(ErrorMessage ="Informe um {0} válido")]
         public string Email { get; set; }
-        public IEnumerable<LoteDto> Lotes { get; set; }
-        public IEnumerable<RedeSocialDto> RedesSociais { get; set; }
-        public IEnumerable<PalestranteDto> PalestrantesEventos { get; set; }
+        public IEnumerable<LoteDto>? Lotes { get; set; }
+        public IEnumerable<RedeSocialDto>? RedesSociais { get; set; }
+        public IEnumerable<PalestranteDto>? PalestrantesEventos { get; set; }
 
     }
 }

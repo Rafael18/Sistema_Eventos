@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProEventos.Application.Contratos;
 using ProEventos.Application.Dtos;
-using ProEventos.Domain;
 
 namespace ProEventos.API.Controllers;
 
@@ -124,7 +123,7 @@ public class EventosController : ControllerBase
             if (evento == null) return NoContent();
 
             if (await _eventoService.DeleteEvento(id))
-                return Ok("Evento deletado");
+                return Ok(new {message = "Deletado"});
             else
                 throw new Exception("Ocorreu um problema não especificado ao tentar deletar o Evento: #" + id);
         }

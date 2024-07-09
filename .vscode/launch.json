@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
             // Usar o IntelliSense para descobrir quais atributos existem para a depuração de C#
             // Passe o mouse sobre a tela para ver a descrição dos atributos existentes
